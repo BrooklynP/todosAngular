@@ -19,9 +19,12 @@ export class MainComponent implements OnInit {
     (document.getElementById('input') as HTMLInputElement).value = '';
   }
 
-  deleteToDo(index: number) {
+  DoToDo(index: number) {
     this.todos[index].state = 'done';
+  }
 
+  DeleteToDo(index: number) {
+    this.todos.splice(index, 1);
   }
 
   ngOnInit() {

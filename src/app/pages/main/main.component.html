@@ -9,8 +9,8 @@
         <section>
             <ul>
                 <li *ngFor="let todo of todos, let i = index">
-                    <button *ngIf="todo.state=='toDo'" (click)="deleteToDo(i)"><i class="far fa-circle"></i></button>
-                    <i class="fas fa-check-circle" *ngIf="todo.state=='done'"></i>
+                    <button *ngIf="todo.state=='toDo'" (click)="DoToDo(i)"><i class="far fa-circle"></i></button>
+                    <button *ngIf="todo.state=='done'" (click)="DeleteToDo(i)"><i class="fas fa-check-circle"></i></button>
                     <p *ngIf="todo.state=='toDo'">{{todo.name}}</p>
                     <s *ngIf="todo.state=='done'">{{todo.name}}</s>
                 </li>

@@ -13,11 +13,15 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   addToDo() {
-    console.log('toadd');
     const input: any = document.getElementById('input');
     const inputText = input.value;
-    this.todos.push({name: inputText});
-    document.getElementById('input').value = '';
+    this.todos.push({name: inputText, state: 'toDo'});
+    (document.getElementById('input') as HTMLInputElement).value = '';
+  }
+
+  deleteToDo(index: number) {
+    this.todos[index].state = 'done';
+
   }
 
   ngOnInit() {

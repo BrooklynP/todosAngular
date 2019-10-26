@@ -8,8 +8,12 @@
         </header>
         <section>
             <ul>
-                <li><i class="fas fa-check-circle"></i>ToDo 1</li>
-                <li *ngFor="let todo of todos"><i class="far fa-circle"></i>{{todo.name}}</li>
+                <li *ngFor="let todo of todos, let i = index">
+                    <button *ngIf="todo.state=='toDo'" (click)="deleteToDo(i)"><i class="far fa-circle"></i></button>
+                    <i class="fas fa-check-circle" *ngIf="todo.state=='done'"></i>
+                    <p *ngIf="todo.state=='toDo'">{{todo.name}}</p>
+                    <s *ngIf="todo.state=='done'">{{todo.name}}</s>
+                </li>
                 <li><button (click)="addToDo()"><i class="fas fa-plus-circle"></i></button><input placeholder="New Todo" id="input"></li>
             </ul>
         </section>

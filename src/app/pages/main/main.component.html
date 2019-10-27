@@ -1,20 +1,30 @@
 <div class="container">
     <div class="side-bar">
-
+        <ul>
+            <li *ngFor="let todolist of todos, let i = index">
+                <button class="select-list-btn" (click)="selectList(i)">
+                    {{todolist.name}}
+                </button>
+            </li>
+            <li>
+                <button (click)="addList()" title="Add List"><i class="fas fa-plus-circle"></i></button><input placeholder="New List" id="addListInput">
+            </li>
+        </ul>
     </div>
     <div class="main">
         <header>
-            <h1>ToDo</h1>
+            <h1>{{todos[selectedTodoListIndex].name}}</h1>
+            <i class="fas fa-minus-circle" (click)="deleteList(selectedTodoListIndex)" title="Delete List"></i>
         </header>
         <section>
             <ul>
-                <li *ngFor="let todo of todos, let i = index">
-                    <button *ngIf="todo.state=='toDo'" (click)="DoToDo(i)"><i class="far fa-circle"></i></button>
-                    <button *ngIf="todo.state=='done'" (click)="DeleteToDo(i)"><i class="fas fa-check-circle"></i></button>
+                <li *ngFor="let todo of todos[selectedTodoListIndex].todos, let i = index">
+                    <button *ngIf="todo.state=='toDo'" (click)="DoToDo(i)"><i class="far fa-circle" title="Complete Todo"></i></button>
+                    <button *ngIf="todo.state=='done'" (click)="DeleteToDo(i)"><i class="fas fa-check-circle" title="Delete Todo"></i></button>
                     <p *ngIf="todo.state=='toDo'">{{todo.name}}</p>
                     <s *ngIf="todo.state=='done'">{{todo.name}}</s>
                 </li>
-                <li><button (click)="addToDo()"><i class="fas fa-plus-circle"></i></button><input placeholder="New Todo" id="input"></li>
+                <li><button (click)="addToDo()" title="Add Todo"><i class="fas fa-plus-circle"></i></button><input placeholder="New Todo" id="input"></li>
             </ul>
         </section>
     </div>

@@ -14,11 +14,24 @@ export class MainComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor() {
+    if (localStorage.getItem('todos') !== '') {
+      this.todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    // Save Data
+    setInterval(() => {
+      const stringifiedArray = JSON.stringify(this.todos);
+      localStorage.setItem('todos', stringifiedArray);
+  }, 3000);
+  }
 
   addToDo() {
     const input: any = document.getElementById('input');
     const inputText = input.value;
+    if (inputText === '') {
+      alert('Please give a name for your todo');
+      return;
+    }
     this.todos[this.selectedTodoListIndex].todos.push({name: inputText, state: 'toDo'});
     (document.getElementById('input') as HTMLInputElement).value = '';
   }
@@ -36,7 +49,13 @@ export class MainComponent implements OnInit {
   }
 
   addList() {
-    this.todos.push({name: (document.getElementById('addListInput') as HTMLInputElement).value, todos: []});
+    const inputText = document.getElementById('addListInput') as HTMLInputElement;
+    const inputTextString = inputText.value;
+    if (inputTextString === '') {
+      alert('Please give a name for your list');
+      return;
+    }
+    this.todos.push({name: inputTextString, todos: []});
     (document.getElementById('addListInput') as HTMLInputElement).value = '';
   }
 

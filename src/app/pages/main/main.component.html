@@ -18,6 +18,7 @@
         </header>
         <section>
             <ul>
+                <li *ngIf="todos[selectedTodoListIndex].todos.length==0"><p class="empty-state-txt">Start by adding a todo!</p></li>
                 <li *ngFor="let todo of todos[selectedTodoListIndex].todos, let i = index">
                     <button *ngIf="todo.state=='toDo'" (click)="DoToDo(i)"><i class="far fa-circle" title="Complete Todo"></i></button>
                     <button *ngIf="todo.state=='done'" (click)="DeleteToDo(i)"><i class="fas fa-check-circle" title="Delete Todo"></i></button>
